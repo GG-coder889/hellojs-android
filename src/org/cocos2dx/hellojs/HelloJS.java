@@ -39,21 +39,24 @@ public class HelloJS extends Activity {
     }
 
     private void addScriptList(LinearLayout linearlayout) {
-        String[] scripts = getJSAssets();
-        for (String s: scripts) {
-            Log.d(LOGTAG, "Script : " + s);
+        try {
+            String[] scripts = getJSAssets();
+
+            Log.d(LOGTAG, "Scripts :\n --- js/\n      |");
+            for (String s: scripts) {
+                Log.d(LOGTAG, "      +-- " + s);
+            }
+
+        } catch (java.io.IOException ioe) {
+            Log.d(LOGTAG, "Exception reading scripts from assets/js.\n" + ioe);
+            return;
         }
     }
 
-    private String[] getJSAssets() {
-        try {
-            AssetManager assets = getAssets();
-            String[] assetList = assets.list("js");
-            return assetList;
-        } catch (java.io.IOException ioe) {
-            Log.d(LOGTAG, "EXCEPTION! " + ioe);
-            return (new String[] {""});
-        }
+    private String[] getJSAssets() throws java.io.IOException {
+        AssetManager assets = getAssets();
+        String[] assetList = assets.list("js");
+        return assetList;
     }
 
     private StringBuilder getLibVersions() {
@@ -62,19 +65,22 @@ public class HelloJS extends Activity {
         try {
             content.append("Cocos2d Version = " + getCocosVersion() + "\n");
         } catch (Throwable t) {
-            content.append("Error in Cocos2d");
+            Log.d(LOGTAG, "Exception : " + t);
+            content.append("Error in Cocos2d.\n");
         }
 
         try {
         content.append("JS VM Version = " + getJSVMVersion() + "\n");
         } catch (Throwable t) {
-            content.append("Error in JavaScript VM");
+            Log.d(LOGTAG, "Exception : " + t);
+            content.append("Error in JavaScript VM.\n");
         }
 
         try {
         content.append("Bindings Version = " + getBindingsVersion() + "\n");
         } catch (Throwable t) {
-            content.append("Error in Cocos2d/JS Bindings");
+            Log.d(LOGTAG, "Exception : " + t);
+            content.append("Error in Cocos2d/JS Bindings.\n");
         }
 
         return content;
