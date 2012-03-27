@@ -1,11 +1,14 @@
 package org.cocos2dx.hellojs;
 
 import android.app.Activity;
+import android.content.res.AssetManager;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
 import android.widget.LinearLayout;
 import android.widget.TextView;
+
+import java.io.IOException;
 
 public class HelloJS extends Activity {
     static private final String LOGTAG = "HelloJS";
@@ -22,6 +25,7 @@ public class HelloJS extends Activity {
         LinearLayout linearlayout = (LinearLayout) findViewById(R.id.mainmenu);
 
         addVersionStringsToLinearLayout(linearlayout);
+        addScriptList(linearlayout);
     }
 
     static {
@@ -34,12 +38,44 @@ public class HelloJS extends Activity {
         linearlayout.addView(tv);
     }
 
+    private void addScriptList(LinearLayout linearlayout) {
+        String[] scripts = getJSAssets();
+        for (String s: scripts) {
+            Log.d(LOGTAG, "Script : " + s);
+        }
+    }
+
+    private String[] getJSAssets() {
+        try {
+            AssetManager assets = getAssets();
+            String[] assetList = assets.list("js");
+            return assetList;
+        } catch (java.io.IOException ioe) {
+            Log.d(LOGTAG, "EXCEPTION! " + ioe);
+            return (new String[] {""});
+        }
+    }
+
     private StringBuilder getLibVersions() {
         StringBuilder content = new StringBuilder();
         content.append("Hello Cocos, JS, Android!\n\n");
+        try {
+            content.append("Cocos2d Version = " + getCocosVersion() + "\n");
+        } catch (Throwable t) {
+            content.append("Error in Cocos2d");
+        }
+
+        try {
         content.append("JS VM Version = " + getJSVMVersion() + "\n");
-        content.append("Cocos2d Version = " + getCocosVersion() + "\n");
+        } catch (Throwable t) {
+            content.append("Error in JavaScript VM");
+        }
+
+        try {
         content.append("Bindings Version = " + getBindingsVersion() + "\n");
+        } catch (Throwable t) {
+            content.append("Error in Cocos2d/JS Bindings");
+        }
 
         return content;
     }
