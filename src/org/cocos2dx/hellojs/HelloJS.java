@@ -2,13 +2,12 @@ package org.cocos2dx.hellojs;
 
 import android.app.Activity;
 import android.content.res.AssetManager;
+import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
 import android.widget.LinearLayout;
 import android.widget.TextView;
-
-import java.io.IOException;
 
 import org.cocos2dx.js.Bindings;
 
@@ -24,10 +23,9 @@ public class HelloJS extends Activity {
 
         setContentView(R.layout.mainmenu);
 
-        LinearLayout linearlayout = (LinearLayout) findViewById(R.id.mainmenu);
+        LinearLayout linearlayout = (LinearLayout) findViewById(R.id.text_content);
 
         addVersionStringsToLinearLayout(linearlayout);
-        addScriptList(linearlayout);
     }
 
     private void addVersionStringsToLinearLayout(LinearLayout linearlayout) {
@@ -36,25 +34,10 @@ public class HelloJS extends Activity {
         linearlayout.addView(tv);
     }
 
-    private void addScriptList(LinearLayout linearlayout) {
-        try {
-            String[] scripts = getJSAssets();
-
-            Log.d(LOGTAG, "Scripts :\n --- js/\n      |");
-            for (String s: scripts) {
-                Log.d(LOGTAG, "      +-- " + s);
-            }
-
-        } catch (java.io.IOException ioe) {
-            Log.d(LOGTAG, "Exception reading scripts from assets/js.\n" + ioe);
-            return;
-        }
-    }
-
-    private String[] getJSAssets() throws java.io.IOException {
-        AssetManager assets = getAssets();
-        String[] assetList = assets.list("js");
-        return assetList;
+    public void launchScriptsActivity(View v) {
+        Log.d(LOGTAG, "launching AssetsScripts...");
+        Intent intent = new Intent(this, AssetsScripts.class);
+        startActivity(intent);
     }
 
     static {
