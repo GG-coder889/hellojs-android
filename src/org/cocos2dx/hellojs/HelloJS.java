@@ -10,6 +10,8 @@ import android.widget.TextView;
 
 import java.io.IOException;
 
+import org.cocos2dx.js.Bindings;
+
 public class HelloJS extends Activity {
     static private final String LOGTAG = "HelloJS";
 
@@ -28,13 +30,9 @@ public class HelloJS extends Activity {
         addScriptList(linearlayout);
     }
 
-    static {
-        System.loadLibrary("game");
-    }
-
     private void addVersionStringsToLinearLayout(LinearLayout linearlayout) {
         TextView tv = new TextView(this);
-        tv.setText(getLibVersions());
+        tv.setText(Bindings.getLibVersions());
         linearlayout.addView(tv);
     }
 
@@ -59,39 +57,7 @@ public class HelloJS extends Activity {
         return assetList;
     }
 
-    private StringBuilder getLibVersions() {
-        StringBuilder content = new StringBuilder();
-        content.append("Hello Cocos, JS, Android!\n\n");
-        try {
-            content.append("Cocos2d Version = " + getCocosVersion() + "\n");
-        } catch (Throwable t) {
-            Log.d(LOGTAG, "Exception : " + t);
-            content.append("Error in Cocos2d.\n");
-        }
-
-        try {
-        content.append("JS VM Version = " + getJSVMVersion() + "\n");
-        } catch (Throwable t) {
-            Log.d(LOGTAG, "Exception : " + t);
-            content.append("Error in JavaScript VM.\n");
-        }
-
-        try {
-        content.append("Bindings Version = " + getBindingsVersion() + "\n");
-        } catch (Throwable t) {
-            Log.d(LOGTAG, "Exception : " + t);
-            content.append("Error in Cocos2d/JS Bindings.\n");
-        }
-
-        return content;
+    static {
+        System.loadLibrary("game");
     }
-
-    private static native String getJSVMVersion();
-    private static native void   jsvmDiagnostics();
-
-    private static native String getBindingsVersion();
-    private static native void   bindingsDiagnostics();
-
-    private static native String getCocosVersion();
-    private static native void   cocosDiagnostics();
 }
