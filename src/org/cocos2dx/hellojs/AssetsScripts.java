@@ -1,7 +1,6 @@
 package org.cocos2dx.hellojs;
 
 import android.app.ListActivity;
-import android.content.res.AssetManager;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
@@ -13,6 +12,8 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import java.io.IOException;
+
+import org.cocos2dx.js.Bindings;
 
 /**
  * A list where the data for the list
@@ -40,9 +41,14 @@ public class AssetsScripts extends ListActivity {
         lv.setOnItemClickListener(new OnItemClickListener() {
                 public void onItemClick(AdapterView<?> parent, View view,
                                         int position, long id) {
-                    // When clicked, show a toast with the TextView text
-                    Toast.makeText(getApplicationContext(), ((TextView) view).getText(),
+                    CharSequence path = ((TextView) view).getText();
+
+                    // When clicked, show a toast with the path
+                    Toast.makeText(getApplicationContext(), path,
                                    Toast.LENGTH_SHORT).show();
+
+                    // ... and run the script
+                    Bindings.executeJS(getAssets(), "js/" + path.toString());
                 }
             });
     }
@@ -64,8 +70,7 @@ public class AssetsScripts extends ListActivity {
     }
 
     private String[] getJSAssets() throws java.io.IOException {
-        AssetManager assets = getAssets();
-        String[] assetList = assets.list("js");
+        String[] assetList = getAssets().list("js");
         return assetList;
     }
 }

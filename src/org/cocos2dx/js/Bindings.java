@@ -1,5 +1,6 @@
 package org.cocos2dx.js;
 
+import android.content.res.AssetManager;
 import android.util.Log;
 
 public class Bindings {
@@ -32,8 +33,17 @@ public class Bindings {
         return content;
     }
 
+    public static void executeJS(AssetManager assetmanager,
+                                 String relativePath) {
+        Log.d(LOGTAG, "executeJS assets/" + relativePath);
+
+        runJSFromAssets(assetmanager, relativePath);
+    }
+
     private static native String getJSVMVersion();
     private static native void   jsvmDiagnostics();
+    private static native void   runJSFromAssets(AssetManager a,
+                                                 String s);
 
     private static native String getBindingsVersion();
     private static native void   bindingsDiagnostics();

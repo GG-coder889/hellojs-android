@@ -58,13 +58,31 @@ namespace JNI_org_cocos2dx_js_bindings {
         LOGD("Java_org_cocos2dx_js_bindings_cocosDiagnostics");
     }
 
+    JNIEXPORT void JNICALL
+    Java_org_cocos2dx_js_bindings_runJSFromAssets (JNIEnv* env,
+                                                   jobject thiz,
+                                                   jobject java_assetmanager,
+                                                   jstring java_relativepath) {
+        LOGD("Java_org_cocos2dx_js_bindings_runJSFromAssets");
+
+        // relative path
+        const char* relativepath;
+        relativepath = env->GetStringUTFChars(java_relativepath, NULL);
+        if (relativepath == NULL) {
+            return; // OutOfMemoryError already thrown
+        }
+        LOGD("relativepath : %s", relativepath);
+        env->ReleaseStringUTFChars(java_relativepath, relativepath);
+    }
+
     static JNINativeMethod bindings_methods[] = {
-        {"getJSVMVersion",      "()Ljava/lang/String;", (void *)&Java_org_cocos2dx_js_bindings_getJSVMVersion},
-        {"jsvmDiagnostics",     "()V",                  (void *)&Java_org_cocos2dx_js_bindings_jsvmDiagnostics},
-        {"getBindingsVersion",  "()Ljava/lang/String;", (void *)&Java_org_cocos2dx_js_bindings_getBindingsVersion},
-        {"bindingsDiagnostics", "()V",                  (void *)&Java_org_cocos2dx_js_bindings_bindingsDiagnostics},
-        {"getCocosVersion",     "()Ljava/lang/String;", (void *)&Java_org_cocos2dx_js_bindings_getCocosVersion},
-        {"cocosDiagnostics",    "()V",                  (void *)&Java_org_cocos2dx_js_bindings_cocosDiagnostics},
+        {"getJSVMVersion",      "()Ljava/lang/String;",                                    (void *)&Java_org_cocos2dx_js_bindings_getJSVMVersion},
+        {"jsvmDiagnostics",     "()V",                                                     (void *)&Java_org_cocos2dx_js_bindings_jsvmDiagnostics},
+        {"getBindingsVersion",  "()Ljava/lang/String;",                                    (void *)&Java_org_cocos2dx_js_bindings_getBindingsVersion},
+        {"bindingsDiagnostics", "()V",                                                     (void *)&Java_org_cocos2dx_js_bindings_bindingsDiagnostics},
+        {"getCocosVersion",     "()Ljava/lang/String;",                                    (void *)&Java_org_cocos2dx_js_bindings_getCocosVersion},
+        {"cocosDiagnostics",    "()V",                                                     (void *)&Java_org_cocos2dx_js_bindings_cocosDiagnostics},
+        {"runJSFromAssets",     "(Landroid/content/res/AssetManager;Ljava/lang/String;)V", (void *)&Java_org_cocos2dx_js_bindings_runJSFromAssets},
     };
 
     // Register methods for org.cocos2dx.js.Bindings
