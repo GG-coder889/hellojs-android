@@ -1,11 +1,15 @@
 package org.cocos2dx.hellojs;
 
 import android.app.Activity;
+import android.content.res.AssetManager;
+import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
 import android.widget.LinearLayout;
 import android.widget.TextView;
+
+import org.cocos2dx.js.Bindings;
 
 public class HelloJS extends Activity {
     static private final String LOGTAG = "HelloJS";
@@ -19,37 +23,24 @@ public class HelloJS extends Activity {
 
         setContentView(R.layout.mainmenu);
 
-        LinearLayout linearlayout = (LinearLayout) findViewById(R.id.mainmenu);
+        LinearLayout linearlayout = (LinearLayout) findViewById(R.id.text_content);
 
         addVersionStringsToLinearLayout(linearlayout);
+    }
+
+    private void addVersionStringsToLinearLayout(LinearLayout linearlayout) {
+        TextView tv = new TextView(this);
+        tv.setText(Bindings.getLibVersions());
+        linearlayout.addView(tv);
+    }
+
+    public void launchScriptsActivity(View v) {
+        Log.d(LOGTAG, "launching AssetsScripts...");
+        Intent intent = new Intent(this, AssetsScripts.class);
+        startActivity(intent);
     }
 
     static {
         System.loadLibrary("game");
     }
-
-    private void addVersionStringsToLinearLayout(LinearLayout linearlayout) {
-        TextView tv = new TextView(this);
-        tv.setText(getLibVersions());
-        linearlayout.addView(tv);
-    }
-
-    private StringBuilder getLibVersions() {
-        StringBuilder content = new StringBuilder();
-        content.append("Hello Cocos, JS, Android!\n\n");
-        content.append("JS VM Version = " + getJSVMVersion() + "\n");
-        content.append("Cocos2d Version = " + getCocosVersion() + "\n");
-        content.append("Bindings Version = " + getBindingsVersion() + "\n");
-
-        return content;
-    }
-
-    private static native String getJSVMVersion();
-    private static native void   jsvmDiagnostics();
-
-    private static native String getBindingsVersion();
-    private static native void   bindingsDiagnostics();
-
-    private static native String getCocosVersion();
-    private static native void   cocosDiagnostics();
 }
