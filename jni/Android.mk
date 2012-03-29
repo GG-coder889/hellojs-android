@@ -13,6 +13,8 @@ LOCAL_WHOLE_STATIC_LIBRARIES += cocosdenshion_static
 LOCAL_WHOLE_STATIC_LIBRARIES += spidermonkey_static
 LOCAL_WHOLE_STATIC_LIBRARIES += jsbindings
 
+LOCAL_LDLIBS += -landroid
+
 include $(BUILD_SHARED_LIBRARY)
 
 $(call import-module,jsbindings)

@@ -1,5 +1,9 @@
+#include <stdlib.h>
+
 #include <jni.h>
 #include <android/log.h>
+#include <android/asset_manager.h>
+#include <android/asset_manager_jni.h>
 
 #include <jsapi.h>
 
@@ -7,7 +11,6 @@
 #include <platform/android/jni/JniHelper.h>
 
 #include <jsbindings.h>
-
 #include <JNI_org_cocos2dx_js_bindings.h>
 
 namespace JNI_org_cocos2dx_js_bindings {
@@ -68,10 +71,45 @@ namespace JNI_org_cocos2dx_js_bindings {
         // relative path
         const char* relativepath;
         relativepath = env->GetStringUTFChars(java_relativepath, NULL);
-        if (relativepath == NULL) {
+        if (NULL == relativepath) {
+            LOGD("relativepath : is NULL");
             return; // OutOfMemoryError already thrown
         }
         LOGD("relativepath : %s", relativepath);
+
+        AAssetManager* assetmanager =
+            AAssetManager_fromJava(env, java_assetmanager);
+        if (NULL == assetmanager) {
+            LOGD("assetmanager : is NULL");
+            return;
+        }
+
+        // read asset data
+        AAsset* asset =
+            AAssetManager_open(assetmanager,
+                               relativepath,
+                               AASSET_MODE_UNKNOWN);
+        if (NULL == asset) {
+            LOGD("asset : is NULL");
+            return;
+        }
+
+        off_t size = AAsset_getLength(asset);
+        LOGD("size = %d ", size);
+
+        char* buf = (char*) malloc(size+1);
+        if (NULL == buf) {
+            LOGD("asset : is NULL");
+            AAsset_close(asset);
+            return;
+        }
+
+        int bytesread = AAsset_read(asset, (void*)buf, size);
+        LOGD("bytesread = %d ", bytesread);
+        buf[size] = '\0';
+
+        AAsset_close(asset);
+
         env->ReleaseStringUTFChars(java_relativepath, relativepath);
     }
 
