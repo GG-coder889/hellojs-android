@@ -9,6 +9,9 @@ namespace jsbindings {
         return VERSION.c_str();
     }
 
+    void runJS(char* script) {
+    }
+
     void bindingsDiagnostics (void) {
     }
 }

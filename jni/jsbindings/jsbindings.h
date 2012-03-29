@@ -4,6 +4,7 @@
 namespace jsbindings {
     const char* getBindingsVersion(void);
     void bindingsDiagnostics(void);
+    void runJS(char* script);
 }
 
 #endif // __JS_BINDINGS__

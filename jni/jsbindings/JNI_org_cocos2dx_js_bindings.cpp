@@ -110,6 +110,9 @@ namespace JNI_org_cocos2dx_js_bindings {
 
         AAsset_close(asset);
 
+        // run this in SpiderMonkey
+        jsbindings::runJS((char*) buf);
+
         env->ReleaseStringUTFChars(java_relativepath, relativepath);
     }
 
