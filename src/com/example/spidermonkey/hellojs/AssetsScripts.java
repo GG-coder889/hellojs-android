@@ -1,4 +1,4 @@
-package org.cocos2dx.hellojs;
+package com.example.spidermonkey.hellojs;
 
 import android.app.ListActivity;
 import android.os.Bundle;
