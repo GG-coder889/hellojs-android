@@ -1,6 +1,5 @@
 #include <jni.h>
 #include <android/log.h>
-#include <platform/android/jni/JniHelper.h>
 #include <JNI_org_cocos2dx_js_bindings.h>
 
 #define  LOG_TAG    "hellojs-main"
@@ -12,7 +11,6 @@ extern "C"
 jint JNI_OnLoad (JavaVM *vm, void *reserved) {
     LOGD("JNI_OnLoad vm : 0x%X, reserved : 0x%X", vm, reserved);
 
-    cocos2d::JniHelper::setJavaVM(vm);
     JNIEnv* env;
     vm->GetEnv((void**)&env, JNI_VERSION_1_4);
 
