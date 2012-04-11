@@ -9,7 +9,7 @@ import android.view.View;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
-import org.cocos2dx.js.Bindings;
+import spidermonkey.Bindings;
 
 public class HelloJS extends Activity {
     static private final String LOGTAG = "HelloJS";

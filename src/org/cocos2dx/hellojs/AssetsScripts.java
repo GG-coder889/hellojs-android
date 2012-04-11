@@ -13,7 +13,7 @@ import android.widget.Toast;
 
 import java.io.IOException;
 
-import org.cocos2dx.js.Bindings;
+import spidermonkey.Bindings;
 
 /**
  * A list where the data for the list
