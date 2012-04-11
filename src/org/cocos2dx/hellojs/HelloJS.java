@@ -21,9 +21,10 @@ public class HelloJS extends Activity {
 
         Log.d(LOGTAG, "onCreate");
 
-        setContentView(R.layout.mainmenu);
+        setContentView(spidermonkey.hellojs.R.layout.mainmenu);
 
-        LinearLayout linearlayout = (LinearLayout) findViewById(R.id.text_content);
+        LinearLayout linearlayout =
+            (LinearLayout) findViewById(spidermonkey.hellojs.R.id.text_content);
 
         addVersionStringsToLinearLayout(linearlayout);
     }
