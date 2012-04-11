@@ -5,7 +5,7 @@ include $(CLEAR_VARS)
 LOCAL_MODULE := jsbindings
 
 LOCAL_SRC_FILES := jsbindings.cpp \
-                   JNI_org_cocos2dx_js_bindings.cpp
+                   JNI_spidermonkey_bindings.cpp
 
 LOCAL_C_INCLUDES := $(LOCAL_PATH)
 

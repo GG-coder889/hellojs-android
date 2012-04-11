@@ -1,6 +1,6 @@
 #include <jni.h>
 #include <android/log.h>
-#include <JNI_org_cocos2dx_js_bindings.h>
+#include <JNI_spidermonkey_bindings.h>
 
 #define  LOG_TAG    "hellojs-main"
 #define  LOGD(...)  __android_log_print(ANDROID_LOG_DEBUG,LOG_TAG,__VA_ARGS__)
@@ -14,7 +14,7 @@ jint JNI_OnLoad (JavaVM *vm, void *reserved) {
     JNIEnv* env;
     vm->GetEnv((void**)&env, JNI_VERSION_1_4);
 
-    JNI_org_cocos2dx_js_bindings::registernatives(env);
+    JNI_spidermonkey_bindings::registernatives(env);
 
     LOGD("return JNI_VERSION_1_4");
 	return JNI_VERSION_1_4;
