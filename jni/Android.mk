@@ -11,7 +11,8 @@ LOCAL_SRC_FILES := helloworld/main.cpp
 LOCAL_WHOLE_STATIC_LIBRARIES := spidermonkey_static
 LOCAL_WHOLE_STATIC_LIBRARIES += jsbindings
 
-LOCAL_LDLIBS += -landroid
+LOCAL_LDLIBS := -landroid
+LOCAL_LDLIBS += -llog
 
 include $(BUILD_SHARED_LIBRARY)
 
