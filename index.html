@@ -1,0 +1,81 @@
+<!doctype html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="chrome=1">
+    <title>hellojs-android by folecr</title>
+    
+    <link rel="stylesheet" href="stylesheets/styles.css">
+    <link rel="stylesheet" href="stylesheets/pygment_trac.css">
+    <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no">
+    <!--[if lt IE 9]>
+    <script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script>
+    <![endif]-->
+  </head>
+  <body>
+    <div class="wrapper">
+      <header>
+        <h1>hellojs-android</h1>
+        <p>An Android app that runs JavaScript with SpiderMonkey</p>
+        <p class="view"><a href="https://github.com/folecr/hellojs-android">View the Project on GitHub <small>folecr/hellojs-android</small></a></p>
+        <ul>
+          <li><a href="https://github.com/folecr/hellojs-android/zipball/master">Download <strong>ZIP File</strong></a></li>
+          <li><a href="https://github.com/folecr/hellojs-android/tarball/master">Download <strong>TAR Ball</strong></a></li>
+          <li><a href="https://github.com/folecr/hellojs-android">Fork On <strong>GitHub</strong></a></li>
+        </ul>
+      </header>
+      <section>
+        <h1>hellojs-android</h1>
+
+<p>This application provides an interface to running JavaScript with SpiderMonkey on Android</p>
+
+<ul>
+<li>Place your scripts (.js files) in the <em>assets</em> folder</li>
+<li>
+<a href="#Build">Build</a> the app</li>
+<li>Install <em>HelloJS.apk</em>
+</li>
+<li>Launch the <em>SpiderMonkey HelloJS</em> application</li>
+<li>The first screen will display version info about the SpiderMonkey VM and bindings</li>
+<li>Click 'Scripts' to display a list of JavaScript files that was placed in <em>assets</em>
+</li>
+<li>Select the script you want to run</li>
+<li>The return value of the scripts will be displayed in adb's <em>logcat</em>
+</li>
+</ul><h2>Screenshots</h2>
+
+<p><img src="http://27.media.tumblr.com/tumblr_m2e22uPhm41rtg9glo1_500.png" alt="Main Screen" width="300"><img src="http://29.media.tumblr.com/tumblr_m2e239i7aQ1rtg9glo1_500.png" alt="Scripts List" width="300"></p>
+
+<h2>Build</h2>
+
+<h5>Prerequisites</h5>
+
+<ul>
+<li><a href="http://folecr.github.com/spidermonkey">spidermonkey</a></li>
+<li>Android SDK</li>
+<li>Android NDK</li>
+</ul><pre><code>&gt; cd hellojs-android
+&gt; ant clean &amp;&amp; rm -rf obj &amp;&amp; rm -rf libs &amp;&amp; rm -rf bin
+&gt; NDK_ROOT=/android-ndk MOZILLA_ROOT=~/ws/mozilla ./build_native.sh
+&gt; ant debug
+</code></pre>
+
+<h2>Authors and Contributors</h2>
+
+<ul>
+<li>
+<a href="https://github.com/funkaster" class="user-mention">@funkaster</a> (iOS)</li>
+<li>
+<a href="https://github.com/folecr" class="user-mention">@folecr</a> (Android)</li>
+<li>The Mozilla SpiderMonkey team (duh)</li>
+</ul>
+      </section>
+      <footer>
+        <p>This project is maintained by <a href="https://github.com/folecr">folecr</a></p>
+        <p><small>Hosted on GitHub Pages &mdash; Theme by <a href="https://github.com/orderedlist">orderedlist</a></small></p>
+      </footer>
+    </div>
+    <script src="javascripts/scale.fix.js"></script>
+    
+  </body>
+</html>
